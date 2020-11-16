@@ -1,8 +1,7 @@
 package com.foxminded.collectionframework.provider;
 
-import com.foxminded.collectionframework.domain.SentenceRepository;
+import java.util.Map;
 
 public interface CharCounterProvider {
-
-    String checkInCache(String inputSentence, SentenceRepository sentenceRepository);
+    Map<Character, Integer> charCalculator(String sentence);
 }

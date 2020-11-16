@@ -3,9 +3,6 @@ package com.foxminded.collectionframework.domain;
 import java.util.Map;
 
 public class SentenceRepositoryImpl implements SentenceRepository {
-    private static final String LINE_BREAK = "\n";
-    private static final String QUOTATION_MARK = "\"";
-    private static final String DASH = " - ";
 
     private final Map<String, Map<Character, Integer>> sentenceRepositoryMap;
 
@@ -14,31 +11,17 @@ public class SentenceRepositoryImpl implements SentenceRepository {
     }
 
     @Override
-    public String toString(String sentence) {
-        StringBuilder result = new StringBuilder();
-        Map<Character, Integer> innerMap;
-        innerMap = sentenceRepositoryMap.get(sentence);
-        for (Map.Entry<Character, Integer> pair : innerMap.entrySet())
-        {
-            Character symbol = pair.getKey();
-            Integer symbolCount = pair.getValue();
-            result.append(QUOTATION_MARK);
-            result.append(symbol);
-            result.append(QUOTATION_MARK);
-            result.append(DASH);
-            result.append(symbolCount);
-            result.append(LINE_BREAK);
-        }
-
-        return String.valueOf(result);
-    }
-
-    @Override
-    public boolean containsKey(String sentence) {
+    public boolean isPresent(String sentence) {
         return sentenceRepositoryMap.containsKey(sentence);
     }
 
-    public void addToCache(String sentence, Map<Character, Integer> param) {
+    @Override
+    public void put(String sentence, Map<Character, Integer> param) {
         this.sentenceRepositoryMap.put(sentence, param);
+    }
+
+    @Override
+    public Map<Character, Integer> get(String sentence) {
+        return this.sentenceRepositoryMap.get(sentence);
     }
 }

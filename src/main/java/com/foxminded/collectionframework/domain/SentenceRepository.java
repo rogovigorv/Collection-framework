@@ -3,9 +3,9 @@ package com.foxminded.collectionframework.domain;
 import java.util.Map;
 
 public interface SentenceRepository {
-    boolean containsKey(String sentence);
+    boolean isPresent(String sentence);
 
-    String toString(String sentence);
+    void put(String sentence, Map<Character, Integer> param);
 
-    void addToCache(String sentence, Map<Character, Integer> param);
+    Map<Character, Integer> get(String sentence);
 }
