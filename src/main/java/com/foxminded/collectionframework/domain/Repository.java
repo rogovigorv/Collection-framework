@@ -2,7 +2,7 @@ package com.foxminded.collectionframework.domain;
 
 import java.util.Map;
 
-public interface SentenceRepository {
+public interface Repository {
     boolean isPresent(String sentence);
 
     void put(String sentence, Map<Character, Integer> param);

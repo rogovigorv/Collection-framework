@@ -1,29 +1,31 @@
 package com.foxminded.collectionframework;
 
-import com.foxminded.collectionframework.domain.SentenceRepository;
+import com.foxminded.collectionframework.domain.Repository;
 import com.foxminded.collectionframework.formatter.Formatter;
-import com.foxminded.collectionframework.formatter.FormatterImpl;
 import com.foxminded.collectionframework.provider.CharCounterProvider;
-import com.foxminded.collectionframework.provider.CharCounterProviderImpl;
+import com.foxminded.collectionframework.provider.StringCharCounterProvider;
 import com.foxminded.collectionframework.validator.Validator;
-import com.foxminded.collectionframework.validator.ValidatorImpl;
 
 public class CharCounterFacade {
+    private final Validator validator;
+    private final Formatter formatter;
+    private final Repository repository;
 
-    public String distribute(String sentence, SentenceRepository sentenceRepository) {
-        Validator validator = new ValidatorImpl();
-        CharCounterProvider charCounterProvider = new CharCounterProviderImpl();
-        Formatter formatter = new FormatterImpl();
-
-        validator.validate(sentence);
-        if (!this.checkInCache(sentence, sentenceRepository)) {
-            sentenceRepository.put(sentence, charCounterProvider.charCalculator(sentence));
-        }
-
-        return formatter.toString(sentence, sentenceRepository);
+    public CharCounterFacade(Validator validator, Formatter formatter, Repository repository) {
+        this.validator = validator;
+        this.formatter = formatter;
+        this.repository = repository;
     }
 
-    private boolean checkInCache(String sentence, SentenceRepository sentenceRepository) {
-        return sentenceRepository.isPresent(sentence);
+    public String distribute(String sentence) {
+
+        CharCounterProvider charCounterProvider = new StringCharCounterProvider();
+        validator.validate(sentence);
+
+        if (!repository.isPresent(sentence)) {
+            repository.put(sentence, charCounterProvider.countCharacters(sentence));
+        }
+
+        return formatter.format(sentence, repository);
     }
 }

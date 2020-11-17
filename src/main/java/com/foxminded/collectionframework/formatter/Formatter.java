@@ -1,8 +1,8 @@
 package com.foxminded.collectionframework.formatter;
 
-import com.foxminded.collectionframework.domain.SentenceRepository;
+import com.foxminded.collectionframework.domain.Repository;
 
 public interface Formatter {
 
-    String toString(String sentence, SentenceRepository sentenceRepository);
+    String format(String sentence, Repository sentenceRepository);
 }
