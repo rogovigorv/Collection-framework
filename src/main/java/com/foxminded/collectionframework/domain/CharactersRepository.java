@@ -2,11 +2,11 @@ package com.foxminded.collectionframework.domain;
 
 import java.util.Map;
 
-public class StringRepository implements Repository {
+public class CharactersRepository implements Repository {
 
     private final Map<String, Map<Character, Integer>> sentenceRepositoryMap;
 
-    public StringRepository(Map<String, Map<Character, Integer>> map) {
+    public CharactersRepository(Map<String, Map<Character, Integer>> map) {
         this.sentenceRepositoryMap = map;
     }
 

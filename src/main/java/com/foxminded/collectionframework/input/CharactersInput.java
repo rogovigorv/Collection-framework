@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class StringInput implements Input {
+public class CharactersInput implements Input {
 
     @Override
     public String inputSentence() {

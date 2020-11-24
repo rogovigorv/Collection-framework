@@ -3,7 +3,7 @@ package com.foxminded.collectionframework.provider;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class StringCharCounterProvider implements CharCounterProvider {
+public class CharactersCounterProvider implements CounterProvider {
 
     @Override
     public Map<Character, Integer> countCharacters(String sentence) {

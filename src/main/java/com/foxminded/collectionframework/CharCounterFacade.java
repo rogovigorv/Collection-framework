@@ -2,9 +2,10 @@ package com.foxminded.collectionframework;
 
 import com.foxminded.collectionframework.domain.Repository;
 import com.foxminded.collectionframework.formatter.Formatter;
-import com.foxminded.collectionframework.provider.CharCounterProvider;
-import com.foxminded.collectionframework.provider.StringCharCounterProvider;
+import com.foxminded.collectionframework.provider.CounterProvider;
+import com.foxminded.collectionframework.provider.CharactersCounterProvider;
 import com.foxminded.collectionframework.validator.Validator;
+import java.util.Map;
 
 public class CharCounterFacade {
     private final Validator validator;
@@ -19,13 +20,15 @@ public class CharCounterFacade {
 
     public String distribute(String sentence) {
 
-        CharCounterProvider charCounterProvider = new StringCharCounterProvider();
+        CounterProvider counterProvider = new CharactersCounterProvider();
         validator.validate(sentence);
 
         if (!repository.isPresent(sentence)) {
-            repository.put(sentence, charCounterProvider.countCharacters(sentence));
+            repository.put(sentence, counterProvider.countCharacters(sentence));
         }
 
-        return formatter.format(sentence, repository);
+        Map<Character, Integer> innerMap = repository.get(sentence);
+
+        return formatter.format(sentence, innerMap);
     }
 }

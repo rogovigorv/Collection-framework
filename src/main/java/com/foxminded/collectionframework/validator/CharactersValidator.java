@@ -1,6 +1,6 @@
 package com.foxminded.collectionframework.validator;
 
-public class StringValidator implements Validator {
+public class CharactersValidator implements Validator {
 
     @Override
     public void validate(String sentence) {
